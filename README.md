@@ -118,6 +118,8 @@ curl -X POST http://localhost:3000/products/<product-id>/activate
 
 ## 🔧 Variáveis de Ambiente
 
+Crie um arquivo `.env` na raiz do projeto baseado em `.env.example`:
+
 ```env
 # App
 NODE_ENV=development
@@ -144,6 +146,43 @@ KAFKA_CONSUMER_TIMEOUT=30000
 LOG_LEVEL=info
 LOG_FORMAT=json
 ```
+
+### Detalhes das Variáveis
+
+#### App
+| Variável | Descrição | Padrão |
+|----------|-----------|--------|
+| `NODE_ENV` | Ambiente de execução (`development`, `production`, `test`) | `development` |
+| `PORT` | Porta HTTP onde a API será acessível | `3000` |
+
+#### Database
+| Variável | Descrição | Padrão |
+|----------|-----------|--------|
+| `DATABASE_HOST` | Host do servidor PostgreSQL | `localhost` |
+| `DATABASE_PORT` | Porta do PostgreSQL | `5432` |
+| `DATABASE_USER` | Usuário de acesso ao banco de dados | `postgres` |
+| `DATABASE_PASSWORD` | Senha do usuário PostgreSQL | `postgres` |
+| `DATABASE_NAME` | Nome do banco de dados a utilizar | `catalog_db` |
+
+#### Kafka Producer
+| Variável | Descrição | Padrão |
+|----------|-----------|--------|
+| `KAFKA_BROKERS` | Endereço dos brokers Kafka (separados por vírgula se múltiplos) | `localhost:9092` |
+| `KAFKA_CLIENT_ID` | Identificador único do cliente produtor Kafka | `catalog-service` |
+| `KAFKA_PRODUCER_TIMEOUT` | Timeout em ms para enviar mensagens ao Kafka | `10000` |
+
+#### Kafka Consumer (Audit)
+| Variável | Descrição | Padrão |
+|----------|-----------|--------|
+| `KAFKA_CONSUMER_ID` | Identificador único do consumidor de auditoria | `catalog-audit-consumer` |
+| `KAFKA_CONSUMER_GROUP` | Grupo de consumidores Kafka (permite múltiplas instâncias consumirem em paralelo) | `audit-service-group` |
+| `KAFKA_CONSUMER_TIMEOUT` | Timeout em ms para processar mensagens do Kafka | `30000` |
+
+#### Logging
+| Variável | Descrição | Padrão |
+|----------|-----------|--------|
+| `LOG_LEVEL` | Nível de log (`debug`, `info`, `warn`, `error`) | `info` |
+| `LOG_FORMAT` | Formato de saída dos logs (`json`, `simple`) | `json` |
 
 ## 🧪 Testes
 
